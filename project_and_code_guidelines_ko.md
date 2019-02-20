@@ -1,24 +1,30 @@
-# 1. Project guidelines
+# 1. 프로젝트 가이드라인
 
-## 1.1 Project structure
+## 1.1 프로젝트 구조
 
 New projects should follow the Android Gradle project structure that is defined on the [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure). The [ribot Boilerplate](https://github.com/ribot/android-boilerplate) project is a good reference to start from.
 
-## 1.2 File naming
+새 프로젝트는 [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure) 에 정의된 Android Gradle project 구조를 따라야 한다.
+
+## 1.2 파일명명 규칙
 
 ### 1.2.1 Class files
 Class names are written in [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase).
 
-For classes that extend an Android component, the name of the class should end with the name of the component; for example: `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`.
+클래스 명은 [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase) 를 따른다.
 
-### 1.2.2 Resources files
+For classes that extend an Android component, the name of the class should end with the name of the component; for example: `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`.
+Android component 들은 파일명 끝에 component 이름을 명시해야한다. 예) `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`
+
+### 1.2.2 리소스파일
 
 Resources file names are written in __lowercase_underscore__.
+리소스파일은 소문자와 언더바로 구성 ( __lowercase_underscore__ )
 
-#### 1.2.2.1 Drawable files
+#### 1.2.2.1 Drawable 파일
 
 Naming conventions for drawables:
-
+drawable 명명법
 
 | Asset Type   | Prefix            |		Example               |
 |--------------| ------------------|-----------------------------|
