@@ -39,6 +39,8 @@ drawable 명명법
 
 Naming conventions for icons (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
 
+아이콘 명명법 (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
+
 | Asset Type                      | Prefix             | Example                      |
 | --------------------------------| ----------------   | ---------------------------- |
 | Icons                           | `ic_`              | `ic_star.png`                |
@@ -49,6 +51,7 @@ Naming conventions for icons (taken from [Android iconography guidelines](http:/
 | Dialog icons                    | `ic_dialog`        | `ic_dialog_info.png`         |
 
 Naming conventions for selector states:
+selector 명명법
 
 | State	       | Suffix          | Example                     |
 |--------------|-----------------|-----------------------------|
@@ -62,6 +65,7 @@ Naming conventions for selector states:
 #### 1.2.2.2 Layout files
 
 Layout files should match the name of the Android components that they are intended for but moving the top level component name to the beginning. For example, if we are creating a layout for the `SignInActivity`, the name of the layout file should be `activity_sign_in.xml`.
+레이아웃 파일은 안드로이드 컴포넌트 이름이 앞으로 오게 만든다. 예를들어 `SignInActivity` 를 만든다 치면 레이아웃 파일 이름은 `activity_sign_in.xml`.
 
 | Component        | Class Name             | Layout Name                   |
 | ---------------- | ---------------------- | ----------------------------- |
