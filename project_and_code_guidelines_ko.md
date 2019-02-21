@@ -66,6 +66,7 @@ selector 명명법
 #### 1.2.2.2 Layout files
 
 Layout files should match the name of the Android components that they are intended for but moving the top level component name to the beginning. For example, if we are creating a layout for the `SignInActivity`, the name of the layout file should be `activity_sign_in.xml`.
+
 레이아웃 파일은 안드로이드 컴포넌트 이름이 앞으로 오게 만든다. 예를들어 `SignInActivity` 를 만든다 치면 레이아웃 파일 이름은 `activity_sign_in.xml`.
 
 | Component        | Class Name             | Layout Name                   |
@@ -78,11 +79,17 @@ Layout files should match the name of the Android components that they are inten
 
 A slightly different case is when we are creating a layout that is going to be inflated by an `Adapter`, e.g to populate a `ListView`. In this case, the name of the layout should start with `item_`.
 
+약간 다른 경우로 'Adapter' 를 만들 때 'ListView' 를 만든다면 layout 파일은 'item_' 으로 시작하게 된다.
+
 Note that there are cases where these rules will not be possible to apply. For example, when creating layout files that are intended to be part of other layouts. In this case you should use the prefix `partial_`.
+
+이러한 규칙은 모든 레이아웃에 적용될 수는 없을 것이다. 예를 들어 다른 레이아웃의 일부분을 파일로 만들었을 때는 'partial_' 이라는 이름을 붙여주는 것이 맞을 것이다.
 
 #### 1.2.2.3 Menu files
 
 Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `activity_user.xml`
+
+
 
 A good practice is to not include the word `menu` as part of the name because these files are already located in the `menu` directory.
 
