@@ -659,6 +659,8 @@ onView(withId(R.id.view))
         .perform(scrollTo())
         .check(matches(isDisplayed()))
 ```
+# Reference
+<https://github.com/ribot/android-guidelines> 에서 가져온 것을 번역 
 
 # License
 
