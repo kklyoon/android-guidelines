@@ -89,6 +89,7 @@ Note that there are cases where these rules will not be possible to apply. For e
 
 Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `activity_user.xml`
 
+레이아웃파일과 비슷하다. `UserActivity` 에서 쓰이는 메뉴파일이라면 `activity_user.xml` 라고 만든다. 이미 'menu' 디렉토리에 존재하기 때문에 굳이 'menu' 라는 이름을 붙이지 않아도 된다. 
 
 
 A good practice is to not include the word `menu` as part of the name because these files are already located in the `menu` directory.
@@ -96,6 +97,8 @@ A good practice is to not include the word `menu` as part of the name because th
 #### 1.2.2.4 Values files
 
 Resource files in the values folder should be __plural__, e.g. `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
+
+다음과 같이 복수형으로 파일이름을 만든다. ->  `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
 # 2 Code guidelines
 
