@@ -2,29 +2,23 @@
 
 ## 1.1 프로젝트 구조
 
-New projects should follow the Android Gradle project structure that is defined on the [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure). The [ribot Boilerplate](https://github.com/ribot/android-boilerplate) project is a good reference to start from.
-
-새 프로젝트는 [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure) 에 정의된 Android Gradle project 구조를 따라야 한다.
+새 프로젝트는 [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure) 에 정의된 Android Gradle project 구조를 따라야 한다. [ribot Boilerplate](https://github.com/ribot/android-boilerplate) 가 좋은 레퍼런스.
 
 ## 1.2 파일명명 규칙
 
-### 1.2.1 Class files
-Class names are written in [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase).
+### 1.2.1 클래스 파일
 
 클래스 명은 [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase) 를 따른다.
 
-For classes that extend an Android component, the name of the class should end with the name of the component; for example: `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`.
-
 Android component 들은 파일명 끝에 component 이름을 명시해야한다. 예) `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`
 
-### 1.2.2 리소스파일
+### 1.2.2 리소스 파일
 
 Resources file names are written in __lowercase_underscore__.
 리소스파일은 소문자와 언더바로 구성 ( __lowercase_underscore__ )
 
 #### 1.2.2.1 Drawable 파일
 
-Naming conventions for drawables:
 drawable 명명법
 
 | Asset Type   | Prefix            |		Example               |
@@ -38,8 +32,6 @@ drawable 명명법
 | Notification | `notification_`	| `notification_bg.9.png`     |
 | Tabs         | `tab_`            | `tab_pressed.9.png`         |
 
-Naming conventions for icons (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
-
 아이콘 명명법 (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
 
 | Asset Type                      | Prefix             | Example                      |
@@ -51,7 +43,6 @@ Naming conventions for icons (taken from [Android iconography guidelines](http:/
 | Tab icons                       | `ic_tab`           | `ic_tab_recent.png`          |
 | Dialog icons                    | `ic_dialog`        | `ic_dialog_info.png`         |
 
-Naming conventions for selector states:
 selector 명명법
 
 | State	       | Suffix          | Example                     |
@@ -65,7 +56,6 @@ selector 명명법
 
 #### 1.2.2.2 Layout files
 
-Layout files should match the name of the Android components that they are intended for but moving the top level component name to the beginning. For example, if we are creating a layout for the `SignInActivity`, the name of the layout file should be `activity_sign_in.xml`.
 
 레이아웃 파일은 안드로이드 컴포넌트 이름이 앞으로 오게 만든다. 예를들어 `SignInActivity` 를 만든다 치면 레이아웃 파일 이름은 `activity_sign_in.xml`.
 
@@ -77,26 +67,16 @@ Layout files should match the name of the Android components that they are inten
 | AdapterView item | ---                    | `item_person.xml`             |
 | Partial layout   | ---                    | `partial_stats_bar.xml`       |
 
-A slightly different case is when we are creating a layout that is going to be inflated by an `Adapter`, e.g to populate a `ListView`. In this case, the name of the layout should start with `item_`.
 
-약간 다른 경우로 'Adapter' 를 만들 때 'ListView' 를 만든다면 layout 파일은 'item_' 으로 시작하게 된다.
+약간 다른 경우로 'ListView' 를 만들 때 'Adapter' 로 다뤄지는 layout 파일은 'item_' 으로 시작하게 된다.
 
-Note that there are cases where these rules will not be possible to apply. For example, when creating layout files that are intended to be part of other layouts. In this case you should use the prefix `partial_`.
+이러한 규칙은 모든 레이아웃에 적용될 수는 없을 것이다. 예를 들어 다른 레이아웃의 일부분을 파일로 만들었을 때는 'partial_' 이라는 이름을 붙여주는 식으로 명명할 수 있다.
 
-이러한 규칙은 모든 레이아웃에 적용될 수는 없을 것이다. 예를 들어 다른 레이아웃의 일부분을 파일로 만들었을 때는 'partial_' 이라는 이름을 붙여주는 것이 맞을 것이다.
-
-#### 1.2.2.3 Menu files
-
-Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `activity_user.xml`
+#### 1.2.2.3 메뉴 파일
 
 레이아웃파일과 비슷하다. `UserActivity` 에서 쓰이는 메뉴파일이라면 `activity_user.xml` 라고 만든다. 이미 'menu' 디렉토리에 존재하기 때문에 굳이 'menu' 라는 이름을 붙이지 않아도 된다. 
 
-
-A good practice is to not include the word `menu` as part of the name because these files are already located in the `menu` directory.
-
 #### 1.2.2.4 Values files
-
-Resource files in the values folder should be __plural__, e.g. `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
 다음과 같이 복수형으로 파일이름을 만든다. ->  `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
