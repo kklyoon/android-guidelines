@@ -14,7 +14,6 @@ Android component 들은 파일명 끝에 component 이름을 명시해야한다
 
 ### 1.2.2 리소스 파일
 
-Resources file names are written in __lowercase_underscore__.
 리소스파일은 소문자와 언더바로 구성 ( __lowercase_underscore__ )
 
 #### 1.2.2.1 Drawable 파일
