@@ -79,13 +79,15 @@ selector 명명법
 
 다음과 같이 복수형으로 파일이름을 만든다. ->  `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
+
+
 # 2 Code guidelines
 
-## 2.1 Java language rules
+## 2.1 Java 언어규칙
 
-### 2.1.1 Don't ignore exceptions
+### 2.1.1 예외처리 무시하지 않기
 
-You must never do the following:
+밑에 처럼 예외처리 그냥 두지마라
 
 ```java
 void setServerPort(String value) {
@@ -95,13 +97,11 @@ void setServerPort(String value) {
 }
 ```
 
-_While you may think that your code will never encounter this error condition or that it is not important to handle it, ignoring exceptions like above creates mines in your code for someone else to trip over some day. You must handle every Exception in your code in some principled way. The specific handling varies depending on the case._ - ([Android code style guidelines](https://source.android.com/source/code-style.html))
+_당신의 코드가 에러처리를 안해도 된다든가 처리하는데 중요하지 않다고 생각할 수 있지만, 위와 같은 예외를 무시하면 언젠가 다른 사람이(혹은 당신이) 곤란을 겪게 될 것이다. 모든 예외를 원칙적으로 다뤄야하고 구체적인 방법은 사례에 따라 달라진다._ - ([Android code style guidelines](https://source.android.com/source/code-style.html))
 
-See alternatives [here](https://source.android.com/source/code-style.html#dont-ignore-exceptions).
+수정된 코드는 [여기](https://source.android.com/source/code-style.html#dont-ignore-exceptions)
 
-### 2.1.2 Don't catch generic exception
-
-You should not do this:
+### 2.1.2 generic exception 처리하지 마라
 
 ```java
 try {
@@ -114,31 +114,33 @@ try {
 }
 ```
 
-See the reason why and some alternatives [here](https://source.android.com/source/code-style.html#dont-catch-generic-exception)
+이유와 수정된 코드는 [여기](https://source.android.com/source/code-style.html#dont-catch-generic-exception)참고 
 
-### 2.1.3 Don't use finalizers
-
-_We don't use finalizers. There are no guarantees as to when a finalizer will be called, or even that it will be called at all. In most cases, you can do what you need from a finalizer with good exception handling. If you absolutely need it, define a `close()` method (or the like) and document exactly when that method needs to be called. See `InputStream` for an example. In this case it is appropriate but not required to print a short log message from the finalizer, as long as it is not expected to flood the logs._ - ([Android code style guidelines](https://source.android.com/source/code-style.html#dont-use-finalizers))
+### 2.1.3 finalizers 사용하지 마라
 
 
-### 2.1.4 Fully qualify imports
+_우리는 finalizer를 사용하지 않는다. finalizer 는 언제 불릴지 혹은 불려지기는 할지에 대한 보장이 없다. 대부분의 경우 예외처리만 잘하면 필요없다. 정말 필요하다면 'close()' 메서드같은 것을 정의하고 메서드가 정확히 언제 불려지는지 문서화 하라. `InputStream`을 예로 들면 finalizer 에서 짧은 로그를 찍는건 나쁘진 않지만 로그가 넘쳐나지 않는 이상 꼭 필요한 것은 아니다._- ([Android code style guidelines](https://source.android.com/source/code-style.html#dont-use-finalizers))
+
+
+### 2.1.4 import 정확하게 하기 
 
 This is bad: `import foo.*;`
 
 This is good: `import foo.Bar;`
 
-See more info [here](https://source.android.com/source/code-style.html#fully-qualify-imports)
+[여기참고](https://source.android.com/source/code-style.html#fully-qualify-imports)
 
-## 2.2 Java style rules
+## 2.2 Java 스타일 규칙
 
 ### 2.2.1 Fields definition and naming
 
-Fields should be defined at the __top of the file__ and they should follow the naming rules listed below.
+ __파일 상단__ 에 정의 되어야 하는 것들과 명명법
 
-* Private, non-static field names start with __m__.
-* Private, static field names start with __s__.
-* Other fields start with a lower case letter.
-* Static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
+
+* Private, non-static 은 __m__ 으로 시작.
+* Private, static 은  __s__ 로 시작.
+* 다른 것들은 소문자로 시작.
+* Static final (상수) 언더바와 대문자(ALL_CAPS_WITH_UNDERSCORES).
 
 Example:
 
@@ -153,18 +155,18 @@ public class MyClass {
 }
 ```
 
-### 2.2.3 Treat acronyms as words
+### 2.2.3 단어와 약어 다루기
 
-| Good           | Bad            |
-| -------------- | -------------- |
-| `XmlHttpRequest` | `XMLHTTPRequest` |
-| `getCustomerId`  | `getCustomerID`  |
-| `String url`     | `String URL`     |
-| `long id`        | `long ID`        |
+|| Good           | Bad            |
+|-----| -------------- | -------------- |
+|클래스| `XmlHttpRequest` | `XMLHTTPRequest` |
+|메서드| `getCustomerId`  | `getCustomerID`  |
+|변수  | `String url`     | `String URL`     |
+|     | `long id`        | `long ID`        |
 
-### 2.2.4 Use spaces for indentation
+### 2.2.4 공백과 들여쓰기 사용
 
-Use __4 space__ indents for blocks:
+블럭에서는  __4 칸__ 들여쓰기:
 
 ```java
 if (x == 1) {
@@ -172,16 +174,16 @@ if (x == 1) {
 }
 ```
 
-Use __8 space__ indents for line wraps:
+한 라인일 경우  __8 칸__ 들여쓰기:
 
 ```java
 Instrument i =
         someLongExpression(that, wouldNotFit, on, one, line);
 ```
 
-### 2.2.5 Use standard brace style
+### 2.2.5 standard brace style
 
-Braces go on the same line as the code before them.
+standard brace style 은 다음과 같은것
 
 ```java
 class MyClass {
@@ -197,9 +199,8 @@ class MyClass {
 }
 ```
 
-Braces around the statements are required unless the condition and the body fit on one line.
+조건과 실행을 한라인에 할 수 있으면 다음과 같이 한다.e.g.
 
-If the condition and the body fit on one line and that line is shorter than the max line length, then braces are not required, e.g.
 
 ```java
 if (condition) body();
@@ -214,21 +215,22 @@ if (condition)
 
 ### 2.2.6 Annotations
 
-#### 2.2.6.1 Annotations practices
+#### 2.2.6.1 Annotations 활용
 
-According to the Android code style guide, the standard practices for some of the predefined annotations in Java are:
 
-* `@Override`: The @Override annotation __must be used__ whenever a method overrides the declaration or implementation from a super-class. For example, if you use the @inheritdocs Javadoc tag, and derive from a class (not an interface), you must also annotate that the method @Overrides the parent class's method.
+안드로이드 스타일 가이드에 따르면, 표준 활용은 Java 에 미리 정의되어 있다.
 
-* `@SuppressWarnings`: The @SuppressWarnings annotation should only be used under circumstances where it is impossible to eliminate a warning. If a warning passes this "impossible to eliminate" test, the @SuppressWarnings annotation must be used, so as to ensure that all warnings reflect actual problems in the code.
+* `@Override`: @Override annotation 은 부모클래스에 있는 메서드를 구현하거나 정의할 때 __반드시 사용되어야__ 하는 annotation 이다. 예를 들어 클래스에서 @inheritdocs Javadoc tag 를 사용했다면 (인터페이스말고), 부모클래스의 메서드에 반드시 @Overrides 를 사용해야한다.
 
-More information about annotation guidelines can be found [here](http://source.android.com/source/code-style.html#use-standard-java-annotations).
+* `@SuppressWarnings`: The @SuppressWarnings annotation warning 을 도저히 없앨 수 없는 상황에서 사용.
 
-#### 2.2.6.2 Annotations style
+annotation 에 대한 자세한 가이드라인은  [여기](http://source.android.com/source/code-style.html#use-standard-java-annotations).
 
-__Classes, Methods and Constructors__
+#### 2.2.6.2 Annotations 스타일
 
-When annotations are applied to a class, method, or constructor, they are listed after the documentation block and should appear as __one annotation per line__ .
+__클래스, 메서드, 생성자__
+
+annotations 이 클래스, 매서드, 생성자 등에 적용될 때 , documatation 블럭 뒤에 오는 것들은 __한 줄씩__ 표기해야한다. 
 
 ```java
 /* This is the documentation block about the class */
@@ -239,23 +241,24 @@ public class MyAnnotatedClass { }
 
 __Fields__
 
-Annotations applying to fields should be listed __on the same line__, unless the line reaches the maximum line length.
+annotation 을 멤버에게 쓸 때는 한줄에 모두 표기해야한다.
 
 ```java
 @Nullable @Mock DataManager mDataManager;
 ```
 
-### 2.2.7 Limit variable scope
+### 2.2.7 변수 범위 제한
 
-_The scope of local variables should be kept to a minimum (Effective Java Item 29). By doing so, you increase the readability and maintainability of your code and reduce the likelihood of error. Each variable should be declared in the innermost block that encloses all uses of the variable._
+_지역 변수의 범위는 최소한으로 제한해야한다. 그렇게 함으로써 코드의 가독성과 유지관리성을 높이고 에러 가능성을 줄일 수 있다._
 
-_Local variables should be declared at the point they are first used. Nearly every local variable declaration should contain an initializer. If you don't yet have enough information to initialize a variable sensibly, you should postpone the declaration until you do._ - ([Android code style guidelines](https://source.android.com/source/code-style.html#limit-variable-scope))
+_지역 변수는 사용하는 시점에 선언되어야 한다. 대부분의 지역 변수에는 초기화가 포함되어야 한다. 아직 지역 변수를 초기화 하기에 충분한 정보가 없다면 정보가 있을 때까지 선언을 미뤄야 한다._ - ([Android code style guidelines](https://source.android.com/source/code-style.html#limit-variable-scope))
 
-### 2.2.8 Order import statements
 
-If you are using an IDE such as Android Studio, you don't have to worry about this because your IDE is already obeying these rules. If not, have a look below.
+### 2.2.8 import 순서
 
-The ordering of import statements is:
+안드로이드 스튜디오를 사용하고 있다면 이미 이러한 규칙을 따르고 있으니 걱정할 필요없다.
+
+import 순서:
 
 1. Android imports
 2. Imports from third parties (com, junit, net, org)
@@ -263,15 +266,16 @@ The ordering of import statements is:
 4. Same project imports
 
 To exactly match the IDE settings, the imports should be:
+IDE 세팅과 맞추려면 
 
-* Alphabetically ordered within each grouping, with capital letters before lower case letters (e.g. Z before a).
-* There should be a blank line between each major grouping (android, com, junit, net, org, java, javax).
+* 알파벳 순서로, 소문자 앞에 대문자 (e.g. a 앞에 Z).
+* 그룹마다 줄바꿈으로 구분해주기 (android, com, junit, net, org, java, javax)
 
-More info [here](https://source.android.com/source/code-style.html#limit-variable-scope)
+더 많은 정보는 [여기](https://source.android.com/source/code-style.html#limit-variable-scope)
 
-### 2.2.9 Logging guidelines
+### 2.2.9 로깅 가이드
 
-Use the logging methods provided by the `Log` class to print out error messages or other information that may be useful for developers to identify issues:
+로그 출력용 `Log` 클래스를 사용할 때 다음과 같이 이슈를 분리할 수 있다.
 
 * `Log.v(String tag, String msg)` (verbose)
 * `Log.d(String tag, String msg)` (debug)
@@ -279,7 +283,7 @@ Use the logging methods provided by the `Log` class to print out error messages 
 * `Log.w(String tag, String msg)` (warning)
 * `Log.e(String tag, String msg)` (error)
 
-As a general rule, we use the class name as tag and we define it as a `static final` field at the top of the file. For example:
+일반적으로 클래스 이름을 `static final` 로 선언해서 다음과 같이 사용할 수 있다.
 
 ```java
 public class MyClass {
@@ -291,21 +295,21 @@ public class MyClass {
 }
 ```
 
-VERBOSE and DEBUG logs __must__ be disabled on release builds. It is also recommended to disable INFORMATION, WARNING and ERROR logs but you may want to keep them enabled if you think they may be useful to identify issues on release builds. If you decide to leave them enabled, you have to make sure that they are not leaking private information such as email addresses, user ids, etc.
+VERBOSE 과 디버그 로그는 __릴리즈 빌드에선 disable__ 되어야 한다. Infomation, Warning, Error 로그도 마찬가지로 diable 하는걸 추천하지만 릴리즈 빌드의 이슈관리에 사용하고 싶으면 enable 시킬 수 있다. enable 할 때는 민감한 정보(email address, user ID 같은)를 노출시키지 않도록 한다.
 
-To only show logs on debug builds:
+디버그 빌드일 때만 사용하려면 다음과 같이
 
 ```java
 if (BuildConfig.DEBUG) Log.d(TAG, "The value of x is " + x);
 ```
 
-### 2.2.10 Class member ordering
+### 2.2.10 클래스 멤버 순서
 
-There is no single correct solution for this but using a __logical__ and __consistent__ order will improve code learnability and readability. It is recommendable to use the following order:
+정해진 법칙은 없지만 유지보수와 가독성 차원에서의 __논리적, 일관성__ 을 지키려면 다음과 같은 순서를 추천한다.
 
-1. Constants
-2. Fields
-3. Constructors
+1. 상수
+2. 멤버변수
+3. 생성자
 4. Override methods and callbacks (public or private)
 5. Public methods
 6. Private methods
@@ -341,7 +345,7 @@ public class MainActivity extends Activity {
 }
 ```
 
-If your class is extending an __Android component__ such as an Activity or a Fragment, it is a good practice to order the override methods so that they __match the component's lifecycle__. For example, if you have an Activity that implements `onCreate()`, `onDestroy()`, `onPause()` and `onResume()`, then the correct order is:
+만약 클래스가 Activity나 Fragment 같이 __Android component__ 를 상속받고 있다면 __component의 lifecycle__ 이 좋은 예가 될 수 있다. 예를 들어 `onCreate()`, `onDestroy()`, `onPause()`, `onResume()` 등을 구현하려면 다음과 같은 순서로
 
 ```java
 public class MainActivity extends Activity {
@@ -362,11 +366,11 @@ public class MainActivity extends Activity {
 }
 ```
 
-### 2.2.11 Parameter ordering in methods
+### 2.2.11 메서드의 파라미터 순서
 
-When programming for Android, it is quite common to define methods that take a `Context`. If you are writing a method like this, then the __Context__ must be the __first__ parameter.
+안드로이드 프로그래밍을 할 때 `Context` 를 받는 경우가 많다. 이 경우 __Context__ 파라미터를 첫번째로 해야한다.
 
-The opposite case are __callback__ interfaces that should always be the __last__ parameter.
+반대로 __callback__ 을 받을 때는 __마지막 파라미터__ 로 받아야 한다.
 
 Examples:
 
@@ -378,11 +382,13 @@ public User loadUser(Context context, int userId);
 public void loadUserAsync(Context context, int userId, UserCallback callback);
 ```
 
-### 2.2.13 String constants, naming, and values
+### 2.2.13 상수문자열 명명, 값
 
-Many elements of the Android SDK such as `SharedPreferences`, `Bundle`, or `Intent` use a key-value pair approach so it's very likely that even for a small app you end up having to write a lot of String constants.
+안드로이드에서 `SharedPreferences`, `Bundle`, `Intent` 등은 key-value 를 짝으로 쓰는 것들이다. 여기엔 상수 문자열이 많이 쓰인다.
 
-When using one of these components, you __must__ define the keys as a `static final` fields and they should be prefixed as indicated below.
+이러한 component 를 쓸때 반드시 `static final`로 선언해서 사용해야 한다. 
+아래와 같은 접두사를 사용하면 좋다.
+
 
 | Element            | Field Name Prefix |
 | -----------------  | ----------------- |
@@ -392,7 +398,8 @@ When using one of these components, you __must__ define the keys as a `static fi
 | Intent Extra       | `EXTRA_`            |
 | Intent Action      | `ACTION_`           |
 
-Note that the arguments of a Fragment - `Fragment.getArguments()` - are also a Bundle. However, because this is a quite common use of Bundles, we define a different prefix for them.
+
+Fragment 에서 전달 값 `Fragment.getArguments()` 을 받아올 때 Bundle 로 받아온다. 일반적인 사용이기 따문에 다른 접두사를 붙여 정의된다.
 
 Example:
 
@@ -407,13 +414,13 @@ static final String EXTRA_SURNAME = "com.myapp.extras.EXTRA_SURNAME";
 static final String ACTION_OPEN_USER = "com.myapp.action.ACTION_OPEN_USER";
 ```
 
-### 2.2.14 Arguments in Fragments and Activities
+### 2.2.14 Fragment 와 Activity 의 전달인자
 
-When data is passed into an `Activity` or `Fragment` via an `Intent` or a `Bundle`, the keys for the different values __must__ follow the rules described in the section above.
+`Intent` 와 `Bundle` 을 통해 `Activity` 혹은 `Fragment` 에 데이터를 넘길 때 키값은 위에 언급한 바와 같이 작성되어야 한다.
 
-When an `Activity` or `Fragment` expects arguments, it should provide a `public static` method that facilitates the creation of the relevant `Intent` or `Fragment`.
+`Activity`,  `Fragment`가 전달인자를 받을 때 `Intent`와 `Fragment`형으로 만들어진 `public static` 메서드를 통해 전달되어야 한다. 
 
-In the case of Activities the method is usually called `getStartIntent()`:
+Activity 의 경우 `getStartIntent()`에서 불릴 때:
 
 ```java
 public static Intent getStartIntent(Context context, User user) {
@@ -423,7 +430,7 @@ public static Intent getStartIntent(Context context, User user) {
 }
 ```
 
-For Fragments it is named `newInstance()` and handles the creation of the Fragment with the right arguments:
+Fragment 의 경우 `newInstance()` 로 전달인자를 사용하여 Fragment 의 생성을 처리할 때:
 
 ```java
 public static UserFragment newInstance(User user) {
@@ -435,47 +442,47 @@ public static UserFragment newInstance(User user) {
 }
 ```
 
-__Note 1__: These methods should go at the top of the class before `onCreate()`.
+__Note 1__: 이런 메서드는 `onCreate()` 위에 있어야 한다..
 
 __Note 2__: If we provide the methods described above, the keys for extras and arguments should be `private` because there is not need for them to be exposed outside the class.
 
-### 2.2.15 Line length limit
+__Note 2__: 위에서 언급한 바와 같이, 클래스 밖에서는 알 수 없도록 extras 와 전달인자의 key 값은 `private` 이어야 한다. 
 
-Code lines should not exceed __100 characters__. If the line is longer than this limit there are usually two options to reduce its length:
 
-* Extract a local variable or method (preferable).
-* Apply line-wrapping to divide a single line into multiple ones.
+### 2.2.15 줄 길이 제한
 
-There are two __exceptions__ where it is possible to have lines longer than 100:
+코드는 __100글자__ 를 넘어서는 안된다. 더 길다면 두가지 옵션이 있다.
+
+* 지역변수와 메서드를 풀어써라
+* 자동 줄 바꿈 사용
+
+100글자를 넘어도 되는 __두가지 예외__ 가 있다.
 
 * Lines that are not possible to split, e.g. long URLs in comments.
-* `package` and `import` statements.
+* 라인을 나눌 수 없을 때, e.g. 주석의 긴 URL
+* `package` 나 `import` 
 
-#### 2.2.15.1 Line-wrapping strategies
+#### 2.2.15.1 자동 줄바꿈 전략
 
-There isn't an exact formula that explains how to line-wrap and quite often different solutions are valid. However there are a few rules that can be applied to common cases.
+정확한 공식은 없다. 하지만 상식적인 수준에서 몇가지 규칙은 있다.
 
-__Break at operators__
-
-When the line is broken at an operator, the break comes __before__ the operator. For example:
+__연산자 앞에서 끊기__
 
 ```java
 int longName = anotherVeryLongVariable + anEvenLongerOne - thisRidiculousLongOne
         + theFinalOne;
 ```
 
-__Assignment Operator Exception__
-
-An exception to the `break at operators` rule is the assignment operator `=`, where the line break should happen __after__ the operator.
+__대입 연산자는 예외__
 
 ```java
 int longName =
         anotherVeryLongVariable + anEvenLongerOne - thisRidiculousLongOne + theFinalOne;
 ```
 
-__Method chain case__
+__메서드 체인의 경우__
 
-When multiple methods are chained in the same line - for example when using Builders - every call to a method should go in its own line, breaking the line before the `.`
+빌더 패턴같은 메서드 체인의 경우 `.` 앞에서 끊는다.
 
 ```java
 Picasso.with(context).load("http://ribot.co.uk/images/sexyjoe.jpg").into(imageView);
@@ -487,9 +494,9 @@ Picasso.with(context)
         .into(imageView);
 ```
 
-__Long parameters case__
+__긴 매개변수의 경우__
 
-When a method has many parameters or its parameters are very long, we should break the line after every comma `,`
+매개변수가 많거나 길거나 할 땐 `,` 뒤에서 끊는다.
 
 ```java
 loadPicture(context, "http://ribot.co.uk/images/sexyjoe.jpg", mImageViewProfilePicture, clickListener, "Title of the picture");
@@ -505,7 +512,8 @@ loadPicture(context,
 
 ### 2.2.16 RxJava chains styling
 
-Rx chains of operators require line-wrapping. Every operator must go in a new line and the line should be broken before the `.`
+
+`.` 앞에서 끊는다.
 
 ```java
 public Observable<Location> syncLocations() {
@@ -552,21 +560,19 @@ This is __bad__ :
 ```
 
 
-### 2.3.2 Resources naming
+### 2.3.2 리소스 명명
 
-Resource IDs and names are written in __lowercase_underscore__.
+ID 와 이름은 __소문자_언더바__ .
 
-#### 2.3.2.1 ID naming
-
-IDs should be prefixed with the name of the element in lowercase underscore. For example:
+#### 2.3.2.1 ID 명명
 
 
-| Element            | Prefix            |
-| -----------------  | ----------------- |
-| `TextView`           | `text_`             |
-| `ImageView`          | `image_`            |
-| `Button`             | `button_`           |
-| `Menu`               | `menu_`             |
+| Element            | Prefix            |(역자)혹은            |
+| -----------------  | ----------------- |----------------- |
+| `TextView`           | `text_`             | `tv_` |
+| `ImageView`          | `image_`            | `iv_` |
+| `Button`             | `button_`           | `btn_` |
+| `Menu`               | `menu_`             |         |
 
 Image view example:
 
@@ -587,9 +593,10 @@ Menu example:
 </menu>
 ```
 
-#### 2.3.2.2 Strings
+#### 2.3.2.2 문자열
 
-String names start with a prefix that identifies the section they belong to. For example `registration_email_hint` or `registration_name_hint`. If a string __doesn't belong__ to any section, then you should follow the rules below:
+
+문자열 이름은 문자열의 카테고리에 따라서 접두어를 붙있다. 
 
 
 | Prefix             | Description                           |
@@ -600,14 +607,13 @@ String names start with a prefix that identifies the section they belong to. For
 | `action_`            | An action such as "Save" or "Create"  |
 
 
+#### 2.3.2.3 스타일과 테마
 
-#### 2.3.2.3 Styles and Themes
+리소스와는 달리 스타일은  __UpperCamelCase__ 로 명명
 
-Unlike the rest of resources, style names are written in __UpperCamelCase__.
+### 2.3.3 Attribute 순서
 
-### 2.3.3 Attributes ordering
-
-As a general rule you should try to group similar attributes together. A good way of ordering the most common attributes is:
+일반적인 규칙의 attribute 순서는
 
 1. View Id
 2. Style
@@ -615,26 +621,27 @@ As a general rule you should try to group similar attributes together. A good wa
 4. Other layout attributes, sorted alphabetically
 5. Remaining attributes, sorted alphabetically
 
-## 2.4 Tests style rules
+## 2.4 테스트 스타일 규칙
 
 ### 2.4.1 Unit tests
 
-Test classes should match the name of the class the tests are targeting, followed by `Test`. For example, if we create a test class that contains tests for the `DatabaseHelper`, we should name it `DatabaseHelperTest`.
 
-Test methods are annotated with `@Test` and should generally start with the name of the method that is being tested, followed by a precondition and/or expected behaviour.
+테스트 클래스는 테스트할 타겟 클래스와 이름을 맞춰야한다. 접미사 `Test` 를 넣고. 예를 들어 `DatabaseHelper` 를 테스트 한다면 `DatabaseHelperTest` 라고 명명한다.
+
+테스트 메서드는 `@Test` annotation 을 붙이고 테스트할 메서드이름과 메서드의 원래상태 혹은 예상결과를 붙여서 명명한다.
 
 * Template: `@Test void methodNamePreconditionExpectedBehaviour()`
 * Example: `@Test void signInWithEmptyEmailFails()`
 
-Precondition and/or expected behaviour may not always be required if the test is clear enough without them.
+메서드의 원래상태나 예상결과가 명확하지 않을 때는 안붙여도 된다. ( 이 때는 맘데로 하라는듯)
 
-Sometimes a class may contain a large amount of methods, that at the same time require several tests for each method. In this case, it's recommendable to split up the test class into multiple ones. For example, if the `DataManager` contains a lot of methods we may want to divide it into `DataManagerSignInTest`, `DataManagerLoadUsersTest`, etc. Generally you will be able to see what tests belong together because they have common [test fixtures](https://en.wikipedia.org/wiki/Test_fixture).
+어떤 클래스는 많은 양의 메서드를 포함하고 있고 각 메서드마다 몇개씩의 테스트가 필요하다. 이런 경우에는 테스트 클래스를 여러개로 나누는걸 추천한다. 예를 들어 `DataManager` 가 많은 메서드를 가지고 있다치면 `DataManagerSignInTest`, `DataManagerLoadUsersTest` 등으로 테스트 클래스를 나눌수 있다. 일반적인 테스트가 어떻게 나뉘는지는  [여기](https://en.wikipedia.org/wiki/Test_fixture)를 참고하라
 
 ### 2.4.2 Espresso tests
 
-Every Espresso test class usually targets an Activity, therefore the name should match the name of the targeted Activity followed by `Test`, e.g. `SignInActivityTest`
+Espresso 테스트는 보통 Activity 를 타겟으로 한다. 그래서 보통 `SignInActivityTest` 이런 식으로 명명한다.
 
-When using the Espresso API it is a common practice to place chained methods in new lines.
+체인 메서드는 다음과 같이 사용한다.
 
 ```java
 onView(withId(R.id.view))
@@ -642,7 +649,7 @@ onView(withId(R.id.view))
         .check(matches(isDisplayed()))
 ```
 # Reference
-<https://github.com/ribot/android-guidelines> 에서 가져온 것을 번역 
+<https://github.com/ribot/android-guidelines> 에서 가져온 것을 번역&의역
 
 # License
 
